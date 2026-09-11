@@ -34,5 +34,5 @@ jobs:
           echo "Commit SHA: ${{ github.sha }}"
 
       - name: Run only on main
-        if: ${{ github.ref == "refs/heads/main" }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "This is the main branch"
