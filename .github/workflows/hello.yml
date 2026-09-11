@@ -2,37 +2,19 @@ name: Hello Pipeline
 on:
   push:
 
-env:
-  GREETING: Hello
-  TARGET: GitHub Actions
-
 jobs:
+
   hello:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
       - name: Say hello
         run: echo "Hello from GitHub Actions"
-        
-      - name: Show operating system
-        run: uname -a
-
-      - name: List repository files
-        run: ls -la
-
-      - name: Use environment variables
-        run: echo "$GREETING from $TARGET"
-
-      - name: Show GitHub context values
-        run: |
-          echo "Repository: ${{ github.repository }}"
-          echo "Triggered by: ${{ github.actor }}"
-          echo "Branch or tag: ${{ github.ref }}"
-          echo "Commit SHA: ${{ github.sha }}"
-
-      - name: Run only on main
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: echo "This is the main branch"
+   
+  test:
+    needs: hello
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Run test
+        run: echo "Running tests"
